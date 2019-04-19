@@ -224,7 +224,7 @@ UIView.performWithoutAnimation {
     })
 }
 ```
-[View in Source](x-source-tag://PerformBatchReloads)
+[View in Source](x-source-tag://PerformUpdates)
 
 Next, the remaining operations are animated:
 
@@ -272,6 +272,6 @@ collectionView.performBatchUpdates({
     navigationItem.rightBarButtonItem?.isEnabled = !people.isEmpty
 })
 ```
-[View in Source](x-source-tag://PerformBatchUpdates)
+[View in Source](x-source-tag://PerformUpdates)
 
 

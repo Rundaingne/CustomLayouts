@@ -78,8 +78,8 @@ class FriendsViewController: UICollectionViewController {
     
     // MARK: Updates
 
+    /// - Tag: PerformUpdates
     func performUpdates() {
-
         // This sample code uses test data to simulate updates received from a remote server. The
         // remoteUpdates array contains a collection of PersonUpdate enums representing deletions,
         // insertions, movements and reloads. Several example data sets have been included below.
@@ -103,7 +103,6 @@ class FriendsViewController: UICollectionViewController {
             PersonUpdate.reload(3)
         ]
 
-        /// - Tag: PerformBatchReloads
         // Perform any cell reloads without animation because there is no movement.
         UIView.performWithoutAnimation {
             collectionView.performBatchUpdates({
@@ -116,7 +115,6 @@ class FriendsViewController: UICollectionViewController {
             })
         }
 
-        /// - Tag: PerformBatchUpdates
         // Animate all other update types together.
         collectionView.performBatchUpdates({
             var deletes = [Int]()
