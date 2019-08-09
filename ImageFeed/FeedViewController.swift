@@ -8,8 +8,10 @@ The detail view controller showing a custon mosaic-style UICollectionViewLayout.
 import UIKit
 import Photos
 
-class FeedViewController: UICollectionViewController {
+class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var assets = [PHAsset]()
     let avatarView = AvatarView()
 
@@ -22,13 +24,13 @@ class FeedViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Setup the mosaic collection view.
-        let mosaicLayout = MosaicLayout()
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: mosaicLayout)
+        
+        let mosaicLayout = MyMosaicLayout()
+        collectionView.collectionViewLayout = mosaicLayout
         collectionView.backgroundColor = UIColor.appBackgroundColor
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.alwaysBounceVertical = true
+        collectionView.alwaysBounceVertical = false
         collectionView.indicatorStyle = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -65,16 +67,18 @@ class FeedViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Always show 50K cells so scrolling performance can be tested.
         return 50_000
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MosaicCell.identifer, for: indexPath) as? MosaicCell
             else { preconditionFailure("Failed to load collection view cell") }
-
+        cell.layer.borderWidth = 8
+        cell.layer.borderColor = UIColor.red.cgColor
+        
         if !assets.isEmpty {
             let assetIndex = indexPath.item % assets.count
             let asset = assets[assetIndex]
