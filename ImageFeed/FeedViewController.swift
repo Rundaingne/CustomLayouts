@@ -76,7 +76,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MosaicCell.identifer, for: indexPath) as? MosaicCell
             else { preconditionFailure("Failed to load collection view cell") }
-        cell.layer.borderWidth = 8
+        cell.layer.borderWidth = 5
         cell.layer.borderColor = UIColor.red.cgColor
         
         if !assets.isEmpty {
